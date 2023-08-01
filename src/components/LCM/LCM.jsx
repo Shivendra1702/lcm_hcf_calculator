@@ -30,7 +30,7 @@ const LCM = () => {
     }
 
     let max = nums[nums.length - 1];
-
+    //ritik pillai weite code here
     setOutput(max);
   };
 
