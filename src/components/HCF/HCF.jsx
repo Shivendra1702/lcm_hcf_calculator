@@ -1,8 +1,15 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
+import { BiArrowBack } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 const HCF = () => {
+  useEffect(() => {
+    document.title = "HCF Calculator";
+  }, []);
+
+  const navigate = useNavigate();
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   let count = 0;
@@ -23,7 +30,7 @@ const HCF = () => {
       }
     }
     nums = temp;
-    // console.log(nums);
+
     let arr = [];
     for (let d = 1; d <= nums[0]; d++) {
       count = 0;
@@ -45,15 +52,26 @@ const HCF = () => {
     setOutput(arr[arr.length - 1]);
   };
   const handleChange = (e) => {
+    if (
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+<>?-=:;,/\\|{}[]`~./'".includes(
+        e.target.value[e.target.value.length - 1]
+      )
+    ) {
+      return;
+    }
     setOutput("");
     setInput(e.target.value);
   };
   return (
     <div className="main">
       <div className="header">
-        <h1>HCF calculator</h1>
+        <button className="b_b" onClick={() => navigate("/")}>
+          <BiArrowBack />
+        </button>
+        <h1>HCF Calculator</h1>{" "}
       </div>
       <div className="form">
+        <span>Enter Space Separated Numbers </span>
         <input
           type="text"
           value={input}
